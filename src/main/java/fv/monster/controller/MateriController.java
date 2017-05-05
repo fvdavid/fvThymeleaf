@@ -51,14 +51,48 @@ public class MateriController {
     }
     
     @PostMapping("/shared")
-    public String prosesSharedForm(
-            @RequestParam("idChecked") List<String> values) {
+    public String prosesSharedForm(@ModelAttribute @Valid Materi m, BindingResult hasilValidasi,
+            @RequestParam("idChecked") List<Long> values) throws Exception {
         
         // setelah di checkbox kemudian di klik share, maka ter-update column shareto menjadi 'ADMIN'
         
         // mendapatkan semua ids dari column yg ingin di update
-        System.out.println("output ---> " + values);
+        System.out.println("output list id ---> " + values);
         
+        values.forEach((id) -> {
+           System.out.println("output id ---> " + id);
+           
+           materiRepository.getMateriById(id);
+           m.setId(id);
+           m.setShareto("admin-fv");
+           materiRepository.save(m);
+        });
+        
+//        long i = 0;
+//        while(i < values.size()) {
+//            
+//            System.out.println("----> : " + values.get((int) i));
+//            System.out.println("iiii : " + i);
+//            md.getMateriById(values.get(i));
+//            i++;
+            
+//            md.getMateriById(i);
+//            m.setId(i);
+//            m.setShareto("admin-fv");
+//            md.save(m);
+
+//            System.out.println("output ---> " + values.size());
+//            System.out.println("i: " + i);
+            
+//        }
+
+//        Iterator<String> iterator = values.get((long) i);
+//        while(iterator.hasNext()) {
+//            m.setShareto("admin-fv");
+//            md.save(m);
+//        }
+
+
         return "redirect:/materi/list";
     }
 

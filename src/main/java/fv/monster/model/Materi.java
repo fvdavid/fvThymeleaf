@@ -74,6 +74,9 @@ public class Materi {
     @Column(name = "shareto")
     private String shareto;
 
+    @Column(name = "share")
+    private Boolean share = null;
+
     public Long getId() {
         return id;
     }
@@ -146,6 +149,14 @@ public class Materi {
         this.shareto = shareto;
     }
 
+    public Boolean getShare() {
+        return this.share;
+    }
+
+    public void setShare(final Boolean share) {
+        this.share = share;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -156,6 +167,7 @@ public class Materi {
         hash = 47 * hash + Objects.hashCode(this.gambar);
         hash = 47 * hash + Objects.hashCode(this.harga);
         hash = 47 * hash + Objects.hashCode(this.status);
+        hash = 47 * hash + Objects.hashCode(this.share);
         return hash;
     }
 
